@@ -108,6 +108,7 @@ try:
             result_defect = Signal(str)
             result_norm = Signal(str)
             result_no_data = Signal(str)
+            result_ok = Signal(str)
 
             def __init__(
                 self,
