@@ -107,8 +107,8 @@ try:
 
             result_defect = Signal(str)
             result_norm = Signal(str)
+            text = Signal(str)
             result_no_data = Signal(str)
-            result_ok = Signal(str)
 
             def __init__(
                 self,
@@ -143,7 +143,7 @@ try:
                         )
                         self.img_check = os.listdir(self.check_path)
                         if self.img_check:
-                            self.signal_text, self.img_source = self.prediction(
+                            self.signal_text, self.img_source_def, self.img_source_ok = self.prediction(
                                 self.data,
                                 file_path=self.file_path,
                                 model_path=self.model_path,
@@ -151,11 +151,15 @@ try:
 
                             if self.signal_text:
                                 self.signal_text = "НОРМА"
+                                self.text.emit(self.signal_text)
+                                self.result_norm.emit(self.img_source_ok)                                
                             else:
                                 self.signal_text = "БРАК"
-                                self.result_defect.emit(self.img_source)
+                                self.text.emit(self.signal_text)
+                                self.result_defect.emit(self.img_source_def)
 
-                            self.result_norm.emit(self.signal_text)
+                            # self.result_norm.emit(self.signal_text)
+                            # self.result_defect.emit(self.signal_text)
 
                             sleep(2)
                         else:
@@ -259,6 +263,7 @@ try:
                                         self.result_path_defect, self.file_to_copy
                                     ),
                                 )
+                                self.img_path_good = None
                                 try:
                                     self.img_tg = shutil.copy(
                                         os.path.join(
@@ -270,7 +275,8 @@ try:
                                     )
                                 except shutil.SameFileError:
                                     pass
-                            return self.signal_var, self.img_path_bad
+
+                            return self.signal_var, self.img_path_bad, self.img_path_good
 
                     except IndexError:
                         pass
@@ -596,13 +602,16 @@ try:
                 button_test.setDisabled(True)
                 button_test.setStyleSheet(normal_button_state)
                 thread_num.send_current_model_box(model_box.currentText())
+                thread_num.result_norm.connect(
+                    lambda result_norm: self.show_pic(result_norm, main_pic)
+                )
                 thread_num.result_defect.connect(
                     lambda result_defect: self.show_pic(result_defect, main_pic)
                 )
 
-                thread_num.result_norm.connect(defect.setText)
-                thread_num.result_norm.connect(
-                    lambda result_norm: self.change_bg_signal(result_norm, defect, main_pic)
+                thread_num.text.connect(defect.setText)
+                thread_num.text.connect(
+                    lambda text: self.change_bg_signal(text, defect, main_pic)
                 )
                 thread_num.result_no_data.connect(defect.setText)
                 thread_num.result_no_data.connect(
@@ -632,13 +641,18 @@ try:
                 button_work.setStyleSheet(normal_button_state)
                 button_test.setStyleSheet(green_button_state)
                 thread_test_num.send_current_model_box(model_box.currentText())
+                thread_test_num.result_norm.connect(
+                    lambda result_norm: self.show_pic(result_norm, main_pic)
+                )
+                
                 thread_test_num.result_defect.connect(
                     lambda result_defect: self.show_pic(result_defect, main_pic)
                 )
-                thread_test_num.result_norm.connect(defect.setText)
-                thread_test_num.result_norm.connect(
-                    lambda result_norm: self.change_bg_signal(result_norm, defect, main_pic)
+                thread_test_num.text.connect(defect.setText)
+                thread_test_num.text.connect(
+                    lambda text: self.change_bg_signal(text, defect, main_pic)
                 )
+                
                 thread_test_num.result_no_data.connect(defect.setText)
                 thread_test_num.result_no_data.connect(
                     lambda result_no_data: self.change_bg_signal_no_data(
@@ -651,7 +665,7 @@ try:
 
                 if check == "НОРМА":
                     defect.setStyleSheet(bg_signal_norm)
-                    main_pic.clear()
+                    # main_pic.clear()
                 elif check == "БРАК":
                     defect.setStyleSheet(bg_sinal_defect)
 
