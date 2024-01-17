@@ -6,13 +6,8 @@
 /__pycache__
 /build
 /dist
-/Video
 /dataset
-/original
 
 
 QC-Monitoring.spec
 example.pid
-main_old_copy.ui
-extract_images_from_video.py
-dataset_pipes.tar.gz
