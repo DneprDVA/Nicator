@@ -300,11 +300,11 @@ try:
                     bot_num="6446699116:AAGJEdSDleg3HYsIXKoDXKNyftnwzgmPduk",
                     chat_id="-1002100830067",
                 )
-                self.thread_tg_3 = Thread_tg(
-                    img_tg_check="images/Line_3/tg/",
-                    bot_num="6446699116:AAGJEdSDleg3HYsIXKoDXKNyftnwzgmPduk",
-                    chat_id="-1002100830067",
-                )
+                # self.thread_tg_3 = Thread_tg(
+                #     img_tg_check="images/Line_3/tg/",
+                #     bot_num="6446699116:AAGJEdSDleg3HYsIXKoDXKNyftnwzgmPduk",
+                #     chat_id="-1002100830067",
+                # )
 
                 basedir_1 = os.path.dirname("models_1" + "/")
                 model_list_1 = os.listdir(basedir_1)
@@ -312,8 +312,8 @@ try:
                 basedir_2 = os.path.dirname("models_2" + "/")
                 model_list_2 = os.listdir(basedir_2)
 
-                basedir_3 = os.path.dirname("models_3" + "/")
-                model_list_3 = os.listdir(basedir_3)
+                # basedir_3 = os.path.dirname("models_3" + "/")
+                # model_list_3 = os.listdir(basedir_3)
 
                 self.model_box.addItems(model_list_1)
                 self.model_box.currentTextChanged.connect(self.model_change)
@@ -321,8 +321,8 @@ try:
                 self.model_box_2.addItems(model_list_2)
                 self.model_box_2.currentTextChanged.connect(self.model_change)
 
-                self.model_box_3.addItems(model_list_3)
-                self.model_box_3.currentTextChanged.connect(self.model_change)
+                # self.model_box_3.addItems(model_list_3)
+                # self.model_box_3.currentTextChanged.connect(self.model_change)
 
                 self.thread_1 = Thread(
                     camera_path="images/Line_1/camera/",
@@ -364,25 +364,25 @@ try:
                     path_for_tg="images/Line_2/defect/",
                 )
 
-                self.thread_3 = Thread(
-                    camera_path="images/Line_3/camera/",
-                    check_path="images/Line_3/source/",
-                    file_path="images/Line_3/source/",
-                    result_path_ok="images/Line_3/ok/",
-                    result_path_defect="images/Line_3/defect/",
-                    model_path="models_3",
-                    path_for_tg="images/Line_3/tg",
-                )
+                # self.thread_3 = Thread(
+                #     camera_path="images/Line_3/camera/",
+                #     check_path="images/Line_3/source/",
+                #     file_path="images/Line_3/source/",
+                #     result_path_ok="images/Line_3/ok/",
+                #     result_path_defect="images/Line_3/defect/",
+                #     model_path="models_3",
+                #     path_for_tg="images/Line_3/tg",
+                # )
 
-                self.thread_test_3 = Thread(
-                    camera_path="images/Line_3/camera/",
-                    check_path="images/Line_3/source/",
-                    file_path="images/Line_3/source/",
-                    result_path_ok="images/Line_3/ok/",
-                    result_path_defect="images/Line_3/defect/",
-                    model_path="models_3",
-                    path_for_tg="images/Line_3/defect/",
-                )
+                # self.thread_test_3 = Thread(
+                #     camera_path="images/Line_3/camera/",
+                #     check_path="images/Line_3/source/",
+                #     file_path="images/Line_3/source/",
+                #     result_path_ok="images/Line_3/ok/",
+                #     result_path_defect="images/Line_3/defect/",
+                #     model_path="models_3",
+                #     path_for_tg="images/Line_3/defect/",
+                # )
 
                 """ 1-я ЛИНИЯ """
                 self.button_stop.pressed.connect(
@@ -484,57 +484,57 @@ try:
                     )
                 )
 
-                """ 3-я ЛИНИЯ """
-                self.button_stop_3.pressed.connect(
-                    lambda: self.button_stop_func(
-                        thread_num=self.thread_3,
-                        thread_tg=self.thread_tg_3,
-                        thread_test_num=self.thread_test_3,
-                        button_work=self.button_work_3,
-                        button_test=self.button_test_3,
-                        defect=self.defect_3,
-                        main_pic=self.main_pic_3,
-                    )
-                )
+                # """ 3-я ЛИНИЯ """
+                # self.button_stop_3.pressed.connect(
+                #     lambda: self.button_stop_func(
+                #         thread_num=self.thread_3,
+                #         thread_tg=self.thread_tg_3,
+                #         thread_test_num=self.thread_test_3,
+                #         button_work=self.button_work_3,
+                #         button_test=self.button_test_3,
+                #         defect=self.defect_3,
+                #         main_pic=self.main_pic_3,
+                #     )
+                # )
 
-                self.button_work_3.pressed.connect(
-                    lambda: self.button_work_func(
-                        model_box=self.model_box_3,
-                        thread_num=self.thread_3,
-                        thread_tg=self.thread_tg_3,
-                        button_work=self.button_work_3,
-                        button_test=self.button_test_3,
-                        defect=self.defect_3,
-                        main_pic=self.main_pic_3,
-                    )
-                )
+                # self.button_work_3.pressed.connect(
+                #     lambda: self.button_work_func(
+                #         model_box=self.model_box_3,
+                #         thread_num=self.thread_3,
+                #         thread_tg=self.thread_tg_3,
+                #         button_work=self.button_work_3,
+                #         button_test=self.button_test_3,
+                #         defect=self.defect_3,
+                #         main_pic=self.main_pic_3,
+                #     )
+                # )
 
-                self.thread_3.result_no_data.connect(
-                    lambda result_no_data: self.stop_thread(
-                        result_no_data, thread_num=self.thread_3
-                    )
-                )
+                # self.thread_3.result_no_data.connect(
+                #     lambda result_no_data: self.stop_thread(
+                #         result_no_data, thread_num=self.thread_3
+                #     )
+                # )
 
-                self.button_test_3.pressed.connect(
-                    lambda: self.button_test_func(
-                        model_box=self.model_box_3,
-                        thread_test_num=self.thread_test_3,
-                        button_work=self.button_work_3,
-                        button_test=self.button_test_3,
-                        defect=self.defect_3,
-                        main_pic=self.main_pic_3,
-                    )
-                )
+                # self.button_test_3.pressed.connect(
+                #     lambda: self.button_test_func(
+                #         model_box=self.model_box_3,
+                #         thread_test_num=self.thread_test_3,
+                #         button_work=self.button_work_3,
+                #         button_test=self.button_test_3,
+                #         defect=self.defect_3,
+                #         main_pic=self.main_pic_3,
+                #     )
+                # )
 
-                ''' Добавить 3-го бота на ТГ '''
+                # ''' Добавить 3-го бота на ТГ '''
 
-                self.button_send_comm_3.pressed.connect(
-                    lambda: self.button_text_send_func(
-                        text_send_box=self.text_send_3,
-                        bot_num="6446699116:AAGJEdSDleg3HYsIXKoDXKNyftnwzgmPduk",
-                        chat_id="-1002100830067",
-                    )
-                )
+                # self.button_send_comm_3.pressed.connect(
+                #     lambda: self.button_text_send_func(
+                #         text_send_box=self.text_send_3,
+                #         bot_num="6446699116:AAGJEdSDleg3HYsIXKoDXKNyftnwzgmPduk",
+                #         chat_id="-1002100830067",
+                #     )
+                # )
 
             def model_change(self, path_dir):
                 ''' Вывод имени текущей модели '''
