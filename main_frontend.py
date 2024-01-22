@@ -1,14 +1,17 @@
 import os
 import sys
 from time import sleep
-import shutil
 from PIL import Image
+import shutil
 import telepot
 import requests
 import pidfile
+
+from predict import change_cmyk_rgb, prediction
+
 from PySide6.QtCore import QThread, Signal, Slot, QTimer
 from PySide6.QtGui import QPixmap, QIcon, QGuiApplication
-from PySide6.QtWidgets import QApplication, QMainWindow, QWidget
+from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QStatusBar
 from MainWindow import Ui_MainWindow
 from style_sheet import (
     normal_button_state,
@@ -17,9 +20,6 @@ from style_sheet import (
     bg_sinal_defect,
     bg_signal_no_data,
 )
-
-import torch
-from torchvision.transforms import v2
 
 try:
     from ctypes import windll  # Only exists on Windows.
@@ -31,9 +31,7 @@ except ImportError:
 
 try:
     with pidfile.PIDFile("example.pid"):
-        "Starting program execution"
-
-        device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+        "Starting program execution"        
 
         class Thread_tg(QThread):
             ''' Класс отправки сообщений в Телеграмм '''
@@ -138,15 +136,19 @@ try:
 
                 while self.is_running:
                     try:
-                        self.change_cmyk = self.change_cmyk_rgb(
-                            change_img_path=self.camera_path, file_path=self.file_path
+                        self.change_cmyk = change_cmyk_rgb(
+                            change_img_path=self.camera_path, 
+                            file_path=self.file_path,
                         )
                         self.img_check = os.listdir(self.check_path)
                         if self.img_check:
-                            self.signal_text, self.img_source_def, self.img_source_ok = self.prediction(
-                                self.data,
+                            self.signal_text, self.img_source_def, self.img_source_ok = prediction(
+                                data=self.data,
                                 file_path=self.file_path,
                                 model_path=self.model_path,
+                                result_path_ok=self.result_path_ok,
+                                result_path_defect=self.result_path_defect,
+                                path_for_tg=self.path_for_tg,
                             )
 
                             if self.signal_text:
@@ -161,7 +163,8 @@ try:
                             # self.result_norm.emit(self.signal_text)
                             # self.result_defect.emit(self.signal_text)
 
-                            sleep(2)
+
+                            sleep(1)
                         else:
                             self.result_no_data.emit("Нет данных!")
                     except TypeError:
@@ -178,115 +181,12 @@ try:
 
                 self.is_running = False
 
-            def change_cmyk_rgb(
-                self, 
-                change_img_path: str, 
-                file_path: str,) -> None:
-                '''Смена цвета поступающих изображений'''
-                
-                if os.listdir(change_img_path):
-                    try:
-                        basedir = os.path.dirname(change_img_path)
-                        self.src = basedir + "/"
-                        self.file_to_copy = os.listdir(change_img_path)[0]
-                        self.image_path = basedir + "/" + os.listdir(change_img_path)[0]
-                        self.image = Image.open(self.image_path)
-                        if self.image.mode == "CMYK" or self.image.mode == "RGB":
-                            self.image = self.image.convert("RGB")
-                            self.image.save(self.image_path)
-                            self.recolored_pic = shutil.move(
-                                os.path.join(self.src, self.file_to_copy),
-                                os.path.join(file_path, self.file_to_copy),
-                            )
-                    except IndexError:
-                        pass
-                else:
-                    pass
-
-            def prediction(
-                self, 
-                data: str,
-                file_path: str,
-                model_path: str,) -> None:
-                '''Основная функция получения инференса из модели и преобразования его в сигнал'''
-                
-                self.model = torch.load(model_path + "/" + str(data)) # map_location=torch.device('cpu')
-                self.model_ft = self.model.to(device)
-                self.data_transforms_test = {
-                    "pipes": v2.Compose(
-                        [
-                            v2.ToImage(),
-                            v2.Resize(528, antialias=True),
-                            v2.ToDtype(torch.float32, scale=True),
-                            v2.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
-                        ]
-                    )
-                }
-                self.class_names = ["def_front", "ok_front"]
-                self.was_training = self.model_ft.training
-                self.model_ft.eval()
-                if os.listdir(file_path):
-                    try:
-                        basedir = os.path.dirname(file_path)
-                        self.src = basedir + "/"
-                        self.file_to_copy = os.listdir(file_path)[0]
-                        self.img_path = basedir + "/" + os.listdir(file_path)[0]
-                        self.img = Image.open(self.img_path)
-                        self.img = self.data_transforms_test["pipes"](
-                            self.img
-                        )
-                        self.img = self.img.unsqueeze(0)
-                        self.img = self.img.to(device)
-
-                        with torch.no_grad():
-                            self.outputs = self.model_ft(self.img)
-                            _, preds = torch.max(self.outputs, 1)
-                            if self.class_names[preds[0]] == "ok_front":
-                                self.signal_var = 1
-                            else:
-                                self.signal_var = 0
-                            self.model_ft.train(mode=self.was_training)
-
-                            if self.signal_var:
-                                self.img_path_good = shutil.move(
-                                    os.path.join(self.src, self.file_to_copy),
-                                    os.path.join(
-                                        self.result_path_ok, self.file_to_copy
-                                    ),
-                                )  # os.remove(self.img_path)
-                                self.img_path_bad = None
-
-                            else:
-                                self.img_path_bad = shutil.move(
-                                    os.path.join(self.src, self.file_to_copy),
-                                    os.path.join(
-                                        self.result_path_defect, self.file_to_copy
-                                    ),
-                                )
-                                self.img_path_good = None
-                                try:
-                                    self.img_tg = shutil.copy(
-                                        os.path.join(
-                                            self.result_path_defect, self.file_to_copy
-                                        ),
-                                        os.path.join(
-                                            self.path_for_tg, self.file_to_copy
-                                        ),
-                                    )
-                                except shutil.SameFileError:
-                                    pass
-
-                            return self.signal_var, self.img_path_bad, self.img_path_good
-
-                    except IndexError:
-                        pass
-                else:
-                    pass
+            
 
         class MyWindow(QMainWindow, Ui_MainWindow):
             def __init__(self, *args, obj=None, **kwargs):
                 super(MyWindow, self).__init__(*args, **kwargs)
-                self.setupUi(self)
+                self.setupUi(self)                
 
                 QTimer.singleShot(10, self.center)
                 
