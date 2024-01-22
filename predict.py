@@ -4,6 +4,8 @@ import shutil
 import torch
 from torchvision.transforms import v2
 
+import numpy as np
+
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 def change_cmyk_rgb(    
@@ -68,6 +70,12 @@ def prediction(
             
             with torch.no_grad():
                 outputs = model_ft(img)
+
+                # logits = outputs.detach().numpy()[0]
+                # probs = np.exp(logits) / (np.exp(logits)).sum()
+                # probs = np.round(probs, decimals=3)
+                # print(probs)
+
                 _, preds = torch.max(outputs, 1)
                 if class_names[preds[0]] == "ok_front":
                     signal_var = 1
