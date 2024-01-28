@@ -7,6 +7,7 @@
 /build
 /dist
 /dataset
+/dataset_grey_granules
 
 
 QC-Monitoring.spec
