@@ -17,7 +17,7 @@ from style_sheet import (
     normal_button_state,
     green_button_state,
     bg_signal_norm,
-    bg_sinal_defect,
+    bg_signal_defect,
     bg_signal_no_data,
 )
 
@@ -189,6 +189,8 @@ try:
                 self.setupUi(self)                
 
                 QTimer.singleShot(10, self.center)
+
+                self.send_begin_work = 'Начало работа!'
                 
                 self.thread_tg_1 = Thread_tg(
                     img_tg_check="images/Line_1/tg/",
@@ -285,6 +287,8 @@ try:
                 # )
 
                 """ 1-я ЛИНИЯ """
+                self.button_work_state = 'status_1'
+
                 self.button_stop.pressed.connect(
                     lambda: self.button_stop_func(
                         thread_num=self.thread_1,
@@ -294,11 +298,14 @@ try:
                         button_test=self.button_test,
                         defect=self.defect,
                         main_pic=self.main_pic,
+                        text_send="Конец работы!",
+                        bot_num="6724363071:AAHgCI3CtHgpi5GF8NAyw7vR0gRLF6FMoaY",
+                        chat_id="-1002008064425",
                     )
                 )
 
                 self.button_work.pressed.connect(
-                    lambda: self.button_work_func(
+                    lambda: self.button_work_func(                        
                         model_box=self.model_box,
                         thread_num=self.thread_1,
                         thread_tg=self.thread_tg_1,
@@ -306,8 +313,20 @@ try:
                         button_test=self.button_test,
                         defect=self.defect,
                         main_pic=self.main_pic,
+                        text_send="Начало работы!",
+                        bot_num="6724363071:AAHgCI3CtHgpi5GF8NAyw7vR0gRLF6FMoaY",
+                        chat_id="-1002008064425",
                     )
                 )
+                
+                # self.button_work.pressed.connect(
+                #     lambda: self.start_message_telegram(
+                #         button_work_state=self.button_work_state,
+                #         text_send="Начало работы!",
+                #         bot_num="6724363071:AAHgCI3CtHgpi5GF8NAyw7vR0gRLF6FMoaY",
+                #         chat_id="-1002008064425",
+                #     )
+                # )
 
                 self.thread_1.result_no_data.connect(
                     lambda result_no_data: self.stop_thread(
@@ -436,6 +455,10 @@ try:
                 #     )
                 # )
 
+            def the_button_was_pressed(self, checked):
+                self.button_is_checked = checked
+                print(self.button_is_checked)
+
             def model_change(self, path_dir):
                 ''' Вывод имени текущей модели '''
                 pass
@@ -455,6 +478,24 @@ try:
                         text_send_box.clear()
                     except FileNotFoundError:
                         pass
+            
+            # def start_message_telegram(self, button_work_state, text_send, bot_num, chat_id):
+            #     ''' Отправка сообщений в ТГ через форму пользователя '''
+            #     if button_work_state=='status_1':                                        
+            #         bot = telepot.Bot(bot_num)
+            #         bot.sendMessage(chat_id, text_send)
+            #         button_work_state = 'status_2'
+            #         print(button_work_state)
+            #     elif button_work_state == 'status_2':
+            #         pass
+            
+            # def end_message_telegram(self, button_work_state, text_send, bot_num, chat_id):
+            #     ''' Отправка сообщений в ТГ через форму пользователя '''
+            #     if button_work_state:                    
+            #         bot = telepot.Bot(bot_num)
+            #         bot.sendMessage(chat_id, text_send)
+            #     else:
+            #         pass
 
             def button_stop_func(
                 self,
@@ -465,11 +506,19 @@ try:
                 button_test,
                 defect,
                 main_pic,
+                text_send,
+                bot_num,
+                chat_id,
             ):
                 ''' Функция остановки работы модели (как теста, так и рабочей):
                 сброс стилей всех кнопок и полей, релиз всех кнопок,
                 очистка поля с изображением, остановка Thread для отправки изображений в ТГ '''
 
+                if str(button_work.styleSheet()) == green_button_state:
+                    bot = telepot.Bot(bot_num)
+                    bot.sendMessage(chat_id, text_send)
+                else:
+                    pass
                 thread_tg.stop()
                 button_work.setEnabled(True)
                 thread_num.stop()
@@ -482,7 +531,7 @@ try:
                 defect.setText("СИГНАЛ")
 
             def button_work_func(
-                self,
+                self,            
                 model_box,
                 thread_num,
                 thread_tg,
@@ -490,15 +539,23 @@ try:
                 button_test,
                 defect,
                 main_pic,
+                text_send,
+                bot_num,
+                chat_id,
             ):
                 ''' Запуск основной работы модели(QThread), запуск Thread для отправки сообщений в ТГ,
                 установка стиля конпки Режим Работа в Зеленый, заморозка кнопки Тестовый режим,
-                отправка изображения в поле для изображения, если сигнал брак '''
+                отправка изображения в поле для изображения, если сигнал брак ''' 
+                if str(button_work.styleSheet()) != green_button_state:
+                    bot = telepot.Bot(bot_num)
+                    bot.sendMessage(chat_id, text_send)
+                else:
+                    pass
 
                 thread_tg.start()
                 thread_tg.send_current_model_box(model_box.currentText())
                 thread_num.start()
-                button_work.setStyleSheet(green_button_state)
+                button_work.setStyleSheet(green_button_state)                
                 button_test.setDisabled(True)
                 button_test.setStyleSheet(normal_button_state)
                 thread_num.send_current_model_box(model_box.currentText())
@@ -521,6 +578,9 @@ try:
                         defect,
                     )
                 )
+
+
+                
 
             def button_test_func(
                 self,
@@ -567,7 +627,7 @@ try:
                     defect.setStyleSheet(bg_signal_norm)
                     # main_pic.clear()
                 elif check == "БРАК":
-                    defect.setStyleSheet(bg_sinal_defect)
+                    defect.setStyleSheet(bg_signal_defect)                    
 
             def change_bg_signal_no_data(self, check, main_pic, defect):
                 '''При отсутствии входящих ихображений меняет стиль рамки сигнала'''

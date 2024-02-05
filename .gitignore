@@ -8,7 +8,9 @@
 /dist
 /dataset
 /dataset_grey_granules
-
+/dataset_red_granules
+/screenshots
+/from_video
 
 QC-Monitoring.spec
 example.pid
