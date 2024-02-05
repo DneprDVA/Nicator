@@ -19,7 +19,7 @@ bg_signal_norm = ( "QLabel {background-color: qlineargradient(x1: 0, y1: 0, x2: 
                         "border: 1px;"
                         "border-radius: 15px;}")
 
-bg_sinal_defect = ("QLabel {background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:"
+bg_signal_defect = ("QLabel {background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:"
                         "0 rgb(132, 0, 0), stop: 1 rgb(255, 0, 0));"
                         "color: white;"
                         "border: 1px;"
