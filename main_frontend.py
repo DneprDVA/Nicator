@@ -318,15 +318,6 @@ try:
                         chat_id="-1002008064425",
                     )
                 )
-                
-                # self.button_work.pressed.connect(
-                #     lambda: self.start_message_telegram(
-                #         button_work_state=self.button_work_state,
-                #         text_send="Начало работы!",
-                #         bot_num="6724363071:AAHgCI3CtHgpi5GF8NAyw7vR0gRLF6FMoaY",
-                #         chat_id="-1002008064425",
-                #     )
-                # )
 
                 self.thread_1.result_no_data.connect(
                     lambda result_no_data: self.stop_thread(
@@ -363,6 +354,9 @@ try:
                         button_test=self.button_test_2,
                         defect=self.defect_2,
                         main_pic=self.main_pic_2,
+                        text_send="Конец работы!",
+                        bot_num="6446699116:AAGJEdSDleg3HYsIXKoDXKNyftnwzgmPduk",
+                        chat_id="-1002100830067",
                     )
                 )
 
@@ -375,6 +369,9 @@ try:
                         button_test=self.button_test_2,
                         defect=self.defect_2,
                         main_pic=self.main_pic_2,
+                        text_send="Начало работы!",
+                        bot_num="6446699116:AAGJEdSDleg3HYsIXKoDXKNyftnwzgmPduk",
+                        chat_id="-1002100830067",
                     )
                 )
 
@@ -477,25 +474,7 @@ try:
                         bot.sendMessage(chat_id, message_box)
                         text_send_box.clear()
                     except FileNotFoundError:
-                        pass
-            
-            # def start_message_telegram(self, button_work_state, text_send, bot_num, chat_id):
-            #     ''' Отправка сообщений в ТГ через форму пользователя '''
-            #     if button_work_state=='status_1':                                        
-            #         bot = telepot.Bot(bot_num)
-            #         bot.sendMessage(chat_id, text_send)
-            #         button_work_state = 'status_2'
-            #         print(button_work_state)
-            #     elif button_work_state == 'status_2':
-            #         pass
-            
-            # def end_message_telegram(self, button_work_state, text_send, bot_num, chat_id):
-            #     ''' Отправка сообщений в ТГ через форму пользователя '''
-            #     if button_work_state:                    
-            #         bot = telepot.Bot(bot_num)
-            #         bot.sendMessage(chat_id, text_send)
-            #     else:
-            #         pass
+                        pass            
 
             def button_stop_func(
                 self,
