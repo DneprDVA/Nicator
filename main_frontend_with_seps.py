@@ -6,8 +6,8 @@ import shutil
 import telepot
 import requests
 import pidfile
-
-from predict import change_cmyk_rgb, prediction
+from itertools import product
+from predict import change_cmyk_rgb, prediction, tile
 
 from PySide6.QtCore import QThread, Signal, Slot, QTimer
 from PySide6.QtGui import QPixmap, QIcon, QGuiApplication
@@ -164,7 +164,7 @@ try:
                             # self.result_defect.emit(self.signal_text)
 
 
-                            sleep(1.5)
+                            sleep(0.5)
                         else:
                             self.result_no_data.emit("Нет данных!")
                     except TypeError:
