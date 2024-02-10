@@ -16,9 +16,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QHBoxLayout,
-    QLabel, QMainWindow, QPushButton, QSizePolicy,
-    QSpacerItem, QTabWidget, QTextEdit, QVBoxLayout,
-    QWidget)
+    QLCDNumber, QLabel, QMainWindow, QPushButton,
+    QSizePolicy, QSpacerItem, QTabWidget, QTextEdit,
+    QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -178,6 +178,16 @@ class Ui_MainWindow(object):
 "border: 1px solid #3c3b4b;\n"
 "color:#efebef;\n"
 "}\n"
+"QLCDNumber{\n"
+"border: 1px solid #3c3b4b;\n"
+"font: 75 12pt \"Arial\";\n"
+"color:#efebef;\n"
+"}\n"
+"QDateTimeEdit{\n"
+"border: 1px solid #3c3b4b;\n"
+"color:#efebef;\n"
+"}"
+                        "\n"
 "#defect {\n"
 "background-color: #6c6a89;\n"
 "border: 1px;\n"
@@ -186,8 +196,7 @@ class Ui_MainWindow(object):
 "#main_pic {\n"
 "background-color: #3c3b4b;\n"
 "border: 1px solid #5f5f5f;\n"
-""
-                        "}\n"
+"}\n"
 "#defect_2 {\n"
 "background-color: #6c6a89;\n"
 "border: 1px;\n"
@@ -211,22 +220,42 @@ class Ui_MainWindow(object):
         font1.setKerning(True)
         self.tab_1.setFont(font1)
         self.tab_1.setStyleSheet(u"")
-        self.verticalLayout_2 = QVBoxLayout(self.tab_1)
-        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.verticalLayout_2.setContentsMargins(-1, 9, -1, -1)
-        self.verticalLayout = QVBoxLayout()
-        self.verticalLayout.setSpacing(10)
+        self.verticalLayout = QVBoxLayout(self.tab_1)
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.horizontalLayout_5 = QHBoxLayout()
-        self.horizontalLayout_5.setSpacing(0)
-        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
-        self.line_number_1 = QLabel(self.tab_1)
-        self.line_number_1.setObjectName(u"line_number_1")
+        self.horizontalLayout_22 = QHBoxLayout()
+        self.horizontalLayout_22.setSpacing(0)
+        self.horizontalLayout_22.setObjectName(u"horizontalLayout_22")
+        self.horizontalLayout_22.setContentsMargins(-1, 0, -1, -1)
+        self.horizontalSpacer_5 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_22.addItem(self.horizontalSpacer_5)
+
+        self.lcdNumber = QLCDNumber(self.tab_1)
+        self.lcdNumber.setObjectName(u"lcdNumber")
         sizePolicy2 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         sizePolicy2.setHorizontalStretch(0)
         sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.lcdNumber.sizePolicy().hasHeightForWidth())
+        self.lcdNumber.setSizePolicy(sizePolicy2)
+        self.lcdNumber.setMinimumSize(QSize(200, 30))
+        self.lcdNumber.setSmallDecimalPoint(False)
+        self.lcdNumber.setMode(QLCDNumber.Bin)
+        self.lcdNumber.setSegmentStyle(QLCDNumber.Flat)
+
+        self.horizontalLayout_22.addWidget(self.lcdNumber)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout_22)
+
+        self.horizontalLayout_5 = QHBoxLayout()
+        self.horizontalLayout_5.setSpacing(0)
+        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
+        self.horizontalLayout_5.setContentsMargins(0, -1, -1, -1)
+        self.line_number_1 = QLabel(self.tab_1)
+        self.line_number_1.setObjectName(u"line_number_1")
         sizePolicy2.setHeightForWidth(self.line_number_1.sizePolicy().hasHeightForWidth())
         self.line_number_1.setSizePolicy(sizePolicy2)
+        self.line_number_1.setMinimumSize(QSize(0, 0))
         palette1 = QPalette()
         brush1 = QBrush(QColor(97, 97, 97, 255))
         brush1.setStyle(Qt.SolidPattern)
@@ -290,6 +319,11 @@ class Ui_MainWindow(object):
         self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
         self.line_5 = QFrame(self.tab_1)
         self.line_5.setObjectName(u"line_5")
+        sizePolicy3 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(5)
+        sizePolicy3.setHeightForWidth(self.line_5.sizePolicy().hasHeightForWidth())
+        self.line_5.setSizePolicy(sizePolicy3)
         self.line_5.setFrameShape(QFrame.HLine)
         self.line_5.setFrameShadow(QFrame.Sunken)
 
@@ -599,19 +633,35 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addLayout(self.horizontalLayout_11)
 
-
-        self.verticalLayout_2.addLayout(self.verticalLayout)
-
         self.tabWidget.addTab(self.tab_1, "")
         self.tab_2 = QWidget()
         self.tab_2.setObjectName(u"tab_2")
         self.tab_2.setFont(font1)
         self.tab_2.setStyleSheet(u"")
-        self.verticalLayout_4 = QVBoxLayout(self.tab_2)
-        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
-        self.verticalLayout_3 = QVBoxLayout()
-        self.verticalLayout_3.setSpacing(10)
-        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.verticalLayout_2 = QVBoxLayout(self.tab_2)
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.horizontalLayout_23 = QHBoxLayout()
+        self.horizontalLayout_23.setSpacing(0)
+        self.horizontalLayout_23.setObjectName(u"horizontalLayout_23")
+        self.horizontalLayout_23.setContentsMargins(-1, 0, -1, -1)
+        self.horizontalSpacer_6 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_23.addItem(self.horizontalSpacer_6)
+
+        self.lcdNumber_2 = QLCDNumber(self.tab_2)
+        self.lcdNumber_2.setObjectName(u"lcdNumber_2")
+        sizePolicy2.setHeightForWidth(self.lcdNumber_2.sizePolicy().hasHeightForWidth())
+        self.lcdNumber_2.setSizePolicy(sizePolicy2)
+        self.lcdNumber_2.setMinimumSize(QSize(200, 30))
+        self.lcdNumber_2.setSmallDecimalPoint(False)
+        self.lcdNumber_2.setMode(QLCDNumber.Bin)
+        self.lcdNumber_2.setSegmentStyle(QLCDNumber.Flat)
+
+        self.horizontalLayout_23.addWidget(self.lcdNumber_2)
+
+
+        self.verticalLayout_2.addLayout(self.horizontalLayout_23)
+
         self.horizontalLayout_12 = QHBoxLayout()
         self.horizontalLayout_12.setSpacing(0)
         self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
@@ -664,20 +714,24 @@ class Ui_MainWindow(object):
         self.horizontalLayout_12.addWidget(self.line_number_2)
 
 
-        self.verticalLayout_3.addLayout(self.horizontalLayout_12)
+        self.verticalLayout_2.addLayout(self.horizontalLayout_12)
 
         self.horizontalLayout_13 = QHBoxLayout()
         self.horizontalLayout_13.setSpacing(0)
         self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
         self.line_6 = QFrame(self.tab_2)
         self.line_6.setObjectName(u"line_6")
+        self.line_6.setEnabled(True)
+        sizePolicy3.setHeightForWidth(self.line_6.sizePolicy().hasHeightForWidth())
+        self.line_6.setSizePolicy(sizePolicy3)
+        self.line_6.setMinimumSize(QSize(0, 0))
         self.line_6.setFrameShape(QFrame.HLine)
         self.line_6.setFrameShadow(QFrame.Sunken)
 
         self.horizontalLayout_13.addWidget(self.line_6)
 
 
-        self.verticalLayout_3.addLayout(self.horizontalLayout_13)
+        self.verticalLayout_2.addLayout(self.horizontalLayout_13)
 
         self.horizontalLayout_14 = QHBoxLayout()
         self.horizontalLayout_14.setSpacing(0)
@@ -741,7 +795,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_14.addWidget(self.model_box_2)
 
 
-        self.verticalLayout_3.addLayout(self.horizontalLayout_14)
+        self.verticalLayout_2.addLayout(self.horizontalLayout_14)
 
         self.horizontalLayout_15 = QHBoxLayout()
         self.horizontalLayout_15.setSpacing(0)
@@ -757,7 +811,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_15.addWidget(self.button_stop_2)
 
 
-        self.verticalLayout_3.addLayout(self.horizontalLayout_15)
+        self.verticalLayout_2.addLayout(self.horizontalLayout_15)
 
         self.horizontalLayout_16 = QHBoxLayout()
         self.horizontalLayout_16.setSpacing(10)
@@ -795,7 +849,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_16.addItem(self.horizontalSpacer_4)
 
 
-        self.verticalLayout_3.addLayout(self.horizontalLayout_16)
+        self.verticalLayout_2.addLayout(self.horizontalLayout_16)
 
         self.horizontalLayout_17 = QHBoxLayout()
         self.horizontalLayout_17.setSpacing(0)
@@ -811,7 +865,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_17.addWidget(self.defect_2)
 
 
-        self.verticalLayout_3.addLayout(self.horizontalLayout_17)
+        self.verticalLayout_2.addLayout(self.horizontalLayout_17)
 
         self.horizontalLayout_18 = QHBoxLayout()
         self.horizontalLayout_18.setSpacing(0)
@@ -832,7 +886,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_18.addWidget(self.main_pic_2)
 
 
-        self.verticalLayout_3.addLayout(self.horizontalLayout_18)
+        self.verticalLayout_2.addLayout(self.horizontalLayout_18)
 
         self.horizontalLayout_19 = QHBoxLayout()
         self.horizontalLayout_19.setSpacing(0)
@@ -882,7 +936,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_19.addWidget(self.comment_2)
 
 
-        self.verticalLayout_3.addLayout(self.horizontalLayout_19)
+        self.verticalLayout_2.addLayout(self.horizontalLayout_19)
 
         self.horizontalLayout_20 = QHBoxLayout()
         self.horizontalLayout_20.setSpacing(0)
@@ -929,7 +983,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_20.addWidget(self.text_send_2)
 
 
-        self.verticalLayout_3.addLayout(self.horizontalLayout_20)
+        self.verticalLayout_2.addLayout(self.horizontalLayout_20)
 
         self.horizontalLayout_21 = QHBoxLayout()
         self.horizontalLayout_21.setSpacing(0)
@@ -945,10 +999,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_21.addWidget(self.button_send_comm_2)
 
 
-        self.verticalLayout_3.addLayout(self.horizontalLayout_21)
-
-
-        self.verticalLayout_4.addLayout(self.verticalLayout_3)
+        self.verticalLayout_2.addLayout(self.horizontalLayout_21)
 
         self.tabWidget.addTab(self.tab_2, "")
         self.tab_3 = QWidget()

@@ -7,11 +7,12 @@ import telepot
 import requests
 import pidfile
 from itertools import product
-from predict import change_cmyk_rgb, prediction, tile
+from datetime import datetime
+from predict_with_seps import change_cmyk_rgb, prediction, tile
 
-from PySide6.QtCore import QThread, Signal, Slot, QTimer
+from PySide6.QtCore import QThread, Signal, Slot, QTimer, QTime
 from PySide6.QtGui import QPixmap, QIcon, QGuiApplication
-from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QStatusBar
+from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QStatusBar, QLCDNumber
 from MainWindow import Ui_MainWindow
 from style_sheet import (
     normal_button_state,
@@ -20,6 +21,10 @@ from style_sheet import (
     bg_signal_defect,
     bg_signal_no_data,
 )
+import time
+import locale
+
+
 
 try:
     from ctypes import windll  # Only exists on Windows.
@@ -189,9 +194,16 @@ try:
                 self.setupUi(self)                
 
                 QTimer.singleShot(10, self.center)
+                 
+                self.lcd = self.findChild(QLCDNumber, "lcdNumber")
+                self.lcd1 = self.findChild(QLCDNumber, "lcdNumber_2")
 
-                self.send_begin_work = 'Начало работа!'
-                
+                '''Create timer to update the LCD'''
+                self.timer = QTimer()
+                self.timer.timeout.connect(self.update_lcd)
+                self.timer.start(1000)
+                self.update_lcd()
+
                 self.thread_tg_1 = Thread_tg(
                     img_tg_check="images/Line_1/tg/",
                     bot_num="6724363071:AAHgCI3CtHgpi5GF8NAyw7vR0gRLF6FMoaY",
@@ -287,7 +299,6 @@ try:
                 # )
 
                 """ 1-я ЛИНИЯ """
-                self.button_work_state = 'status_1'
 
                 self.button_stop.pressed.connect(
                     lambda: self.button_stop_func(
@@ -451,6 +462,15 @@ try:
                 #         chat_id="-1002100830067",
                 #     )
                 # )
+            
+            def update_lcd(self):
+                ''' Функция обновления LCD '''
+                locale.setlocale(locale.LC_ALL, 'ru')
+                formatted_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+                self.lcd.setDigitCount(20)
+                self.lcd.display(formatted_time)
+                self.lcd1.setDigitCount(20)
+                self.lcd1.display(formatted_time)
 
             def the_button_was_pressed(self, checked):
                 self.button_is_checked = checked

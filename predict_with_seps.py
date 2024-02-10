@@ -75,56 +75,34 @@ def prediction(
             file_to_copy = os.listdir(file_path)[0]
             img_path = basedir + "/" + os.listdir(file_path)[0]
             d = 960            
-            img_list = tile(img_path, d)            
-            img0 = data_transforms_test["pipes"](img_list[0])
-            img0 = img0.unsqueeze(0)
-            img0 = img0.to(device)
-            img1 = data_transforms_test["pipes"](img_list[1])
-            img1 = img1.unsqueeze(0)
-            img1 = img1.to(device)
-            img2 = data_transforms_test["pipes"](img_list[2])
-            img2 = img2.unsqueeze(0)
-            img2 = img2.to(device)
-            img3 = data_transforms_test["pipes"](img_list[3])
-            img3 = img3.unsqueeze(0)
-            img3 = img3.to(device)            
+            img_list0 = tile(img_path, d)            
+            img_list1 = []
+            for i in range(len(img_list0)):
+                img0 = data_transforms_test["pipes"](img_list0[i])                
+                img0 = img0.unsqueeze(0)
+                img0 = img0.to(device)
+                img_list1.append(img0)
             
             with torch.no_grad():
-                outputs0 = model_ft(img0)
-                outputs1 = model_ft(img1)
-                outputs2 = model_ft(img2)
-                outputs3 = model_ft(img3)
+                preds_list = []
+                for i in range(len(img_list1)):
+                    outputs = model_ft(img_list1[i])                    
+                    _, preds = torch.max(outputs, 1)
+                    preds_list.append(preds)
 
                 # logits = outputs.detach().numpy()[0]
                 # probs = np.exp(logits) / (np.exp(logits)).sum()
                 # probs = np.round(probs, decimals=3)
                 # print(probs)
-                _, preds0 = torch.max(outputs0, 1)
-                _, preds1 = torch.max(outputs1, 1)
-                _, preds2 = torch.max(outputs2, 1)
-                _, preds3 = torch.max(outputs3, 1)
+                signal_var_list = []
+                for i in range(len(preds_list)):
+                    if class_names[preds_list[i][0]] == "ok_front":
+                        signal_var = 1
+                    else:
+                        signal_var = 0
+                    signal_var_list.append(signal_var)        
 
-                if class_names[preds0[0]] == "ok_front":
-                    signal_var0 = 1
-                else:
-                    signal_var0 = 0
-
-                if class_names[preds1[0]] == "ok_front":
-                    signal_var1 = 1
-                else:
-                    signal_var1 = 0
-
-                if class_names[preds2[0]] == "ok_front":
-                    signal_var2 = 1
-                else:
-                    signal_var2 = 0
-
-                if class_names[preds3[0]] == "ok_front":
-                    signal_var3 = 1
-                else:
-                    signal_var3 = 0         
-
-                sum_signal = signal_var0 + signal_var1 + signal_var2 + signal_var3
+                sum_signal = sum(signal_var_list)
 
                 if sum_signal < 4:
                     signal_var = 0
