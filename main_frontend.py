@@ -447,7 +447,7 @@ try:
                 # self.button_send_comm_3.pressed.connect(
                 #     lambda: self.button_text_send_func(
                 #         text_send_box=self.text_send_3,
-                #         bot_num="6446699116:AAGJEdSDleg3HYsIXKoDXKNyftnwzgmPduk",
+                #         bot_num="",
                 #         chat_id="-1002100830067",
                 #     )
                 # )
