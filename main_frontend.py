@@ -190,21 +190,21 @@ try:
 
                 QTimer.singleShot(10, self.center)
 
-                self.send_begin_work = 'Начало работа!'
+                self.send_begin_work = 'Начало работы!'
                 
                 self.thread_tg_1 = Thread_tg(
                     img_tg_check="images/Line_1/tg/",
-                    bot_num="6724363071:AAHgCI3CtHgpi5GF8NAyw7vR0gRLF6FMoaY",
+                    bot_num="",
                     chat_id="-1002008064425",
                 )
                 self.thread_tg_2 = Thread_tg(
                     img_tg_check="images/Line_2/tg/",
-                    bot_num="6446699116:AAGJEdSDleg3HYsIXKoDXKNyftnwzgmPduk",
+                    bot_num="",
                     chat_id="-1002100830067",
                 )
                 # self.thread_tg_3 = Thread_tg(
                 #     img_tg_check="images/Line_3/tg/",
-                #     bot_num="6446699116:AAGJEdSDleg3HYsIXKoDXKNyftnwzgmPduk",
+                #     bot_num="",
                 #     chat_id="-1002100830067",
                 # )
 
@@ -299,7 +299,7 @@ try:
                         defect=self.defect,
                         main_pic=self.main_pic,
                         text_send="Конец работы!",
-                        bot_num="6724363071:AAHgCI3CtHgpi5GF8NAyw7vR0gRLF6FMoaY",
+                        bot_num="",
                         chat_id="-1002008064425",
                     )
                 )
@@ -314,7 +314,7 @@ try:
                         defect=self.defect,
                         main_pic=self.main_pic,
                         text_send="Начало работы!",
-                        bot_num="6724363071:AAHgCI3CtHgpi5GF8NAyw7vR0gRLF6FMoaY",
+                        bot_num="",
                         chat_id="-1002008064425",
                     )
                 )
@@ -339,7 +339,7 @@ try:
                 self.button_send_comm.pressed.connect(
                     lambda: self.button_text_send_func(
                         text_send_box=self.text_send,
-                        bot_num="6724363071:AAHgCI3CtHgpi5GF8NAyw7vR0gRLF6FMoaY",
+                        bot_num="",
                         chat_id="-1002008064425",
                     )
                 )
@@ -355,7 +355,7 @@ try:
                         defect=self.defect_2,
                         main_pic=self.main_pic_2,
                         text_send="Конец работы!",
-                        bot_num="6446699116:AAGJEdSDleg3HYsIXKoDXKNyftnwzgmPduk",
+                        bot_num="",
                         chat_id="-1002100830067",
                     )
                 )
@@ -370,7 +370,7 @@ try:
                         defect=self.defect_2,
                         main_pic=self.main_pic_2,
                         text_send="Начало работы!",
-                        bot_num="6446699116:AAGJEdSDleg3HYsIXKoDXKNyftnwzgmPduk",
+                        bot_num="",
                         chat_id="-1002100830067",
                     )
                 )
@@ -395,7 +395,7 @@ try:
                 self.button_send_comm_2.pressed.connect(
                     lambda: self.button_text_send_func(
                         text_send_box=self.text_send_2,
-                        bot_num="6446699116:AAGJEdSDleg3HYsIXKoDXKNyftnwzgmPduk",
+                        bot_num="",
                         chat_id="-1002100830067",
                     )
                 )
