@@ -6,12 +6,13 @@
 /__pycache__
 /build
 /dist
-/dataset
 /dataset_grey_granules
 /dataset_red_granules
 /dataset_casting_discs
-/screenshots
-/from_video
+/dataset_diff_color
+/dataset_pipes
+/color_project/dataset_diff_color
+/color_project/__pycache__
 
 QC-Monitoring.spec
 example.pid
