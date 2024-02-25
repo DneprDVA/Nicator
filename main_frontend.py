@@ -281,9 +281,6 @@ def main():
                         )
                     )
 
-
-                    )
-
                     self.button_work_2.pressed.connect(
                         lambda: self.button_work_func(
                             model_box=self.model_box_2,
