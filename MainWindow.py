@@ -16,9 +16,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QHBoxLayout,
-    QLCDNumber, QLabel, QMainWindow, QPushButton,
-    QSizePolicy, QSpacerItem, QTabWidget, QTextEdit,
-    QVBoxLayout, QWidget)
+    QLabel, QMainWindow, QPushButton, QSizePolicy,
+    QSpacerItem, QTabWidget, QTextEdit, QVBoxLayout,
+    QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -230,19 +230,22 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_22.addItem(self.horizontalSpacer_5)
 
-        self.lcdNumber = QLCDNumber(self.tab_1)
-        self.lcdNumber.setObjectName(u"lcdNumber")
+        self.label_time = QLabel(self.tab_1)
+        self.label_time.setObjectName(u"label_time")
         sizePolicy2 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         sizePolicy2.setHorizontalStretch(0)
         sizePolicy2.setVerticalStretch(0)
-        sizePolicy2.setHeightForWidth(self.lcdNumber.sizePolicy().hasHeightForWidth())
-        self.lcdNumber.setSizePolicy(sizePolicy2)
-        self.lcdNumber.setMinimumSize(QSize(200, 30))
-        self.lcdNumber.setSmallDecimalPoint(False)
-        self.lcdNumber.setMode(QLCDNumber.Bin)
-        self.lcdNumber.setSegmentStyle(QLCDNumber.Flat)
+        sizePolicy2.setHeightForWidth(self.label_time.sizePolicy().hasHeightForWidth())
+        self.label_time.setSizePolicy(sizePolicy2)
+        self.label_time.setMinimumSize(QSize(150, 0))
+        font2 = QFont()
+        font2.setPointSize(12)
+        font2.setBold(False)
+        font2.setItalic(True)
+        self.label_time.setFont(font2)
+        self.label_time.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
-        self.horizontalLayout_22.addWidget(self.lcdNumber)
+        self.horizontalLayout_22.addWidget(self.label_time)
 
 
         self.verticalLayout.addLayout(self.horizontalLayout_22)
@@ -291,12 +294,12 @@ class Ui_MainWindow(object):
         palette1.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush3)
 #endif
         self.line_number_1.setPalette(palette1)
-        font2 = QFont()
-        font2.setFamilies([u"Verdana"])
-        font2.setPointSize(16)
-        font2.setBold(True)
-        font2.setItalic(False)
-        self.line_number_1.setFont(font2)
+        font3 = QFont()
+        font3.setFamilies([u"Verdana"])
+        font3.setPointSize(16)
+        font3.setBold(True)
+        font3.setItalic(False)
+        self.line_number_1.setFont(font3)
         self.line_number_1.setMouseTracking(True)
         self.line_number_1.setAutoFillBackground(False)
         self.line_number_1.setFrameShape(QFrame.NoFrame)
@@ -397,12 +400,12 @@ class Ui_MainWindow(object):
         palette2.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush3)
 #endif
         self.model_box.setPalette(palette2)
-        font3 = QFont()
-        font3.setFamilies([u"Verdana"])
-        font3.setPointSize(10)
-        font3.setBold(True)
-        font3.setKerning(True)
-        self.model_box.setFont(font3)
+        font4 = QFont()
+        font4.setFamilies([u"Verdana"])
+        font4.setPointSize(10)
+        font4.setBold(True)
+        font4.setKerning(True)
+        self.model_box.setFont(font4)
         self.model_box.setLayoutDirection(Qt.LeftToRight)
         self.model_box.setEditable(True)
         self.model_box.setCurrentText(u"")
@@ -423,11 +426,11 @@ class Ui_MainWindow(object):
         self.button_stop.setObjectName(u"button_stop")
         self.button_stop.setMinimumSize(QSize(150, 50))
         self.button_stop.setMaximumSize(QSize(150, 50))
-        font4 = QFont()
-        font4.setFamilies([u"Verdana"])
-        font4.setPointSize(9)
-        font4.setBold(False)
-        self.button_stop.setFont(font4)
+        font5 = QFont()
+        font5.setFamilies([u"Verdana"])
+        font5.setPointSize(9)
+        font5.setBold(False)
+        self.button_stop.setFont(font5)
         self.button_stop.setAutoFillBackground(False)
 
         self.horizontalLayout_3.addWidget(self.button_stop)
@@ -449,7 +452,7 @@ class Ui_MainWindow(object):
         self.button_test.setSizePolicy(sizePolicy2)
         self.button_test.setMinimumSize(QSize(150, 50))
         self.button_test.setMaximumSize(QSize(150, 50))
-        self.button_test.setFont(font4)
+        self.button_test.setFont(font5)
         self.button_test.setAutoFillBackground(False)
         self.button_test.setStyleSheet(u"")
 
@@ -461,7 +464,7 @@ class Ui_MainWindow(object):
         self.button_work.setSizePolicy(sizePolicy2)
         self.button_work.setMinimumSize(QSize(150, 50))
         self.button_work.setMaximumSize(QSize(150, 50))
-        self.button_work.setFont(font4)
+        self.button_work.setFont(font5)
         self.button_work.setAutoFillBackground(False)
 
         self.horizontalLayout_2.addWidget(self.button_work)
@@ -481,11 +484,11 @@ class Ui_MainWindow(object):
         sizePolicy2.setHeightForWidth(self.defect.sizePolicy().hasHeightForWidth())
         self.defect.setSizePolicy(sizePolicy2)
         self.defect.setMinimumSize(QSize(140, 35))
-        font5 = QFont()
-        font5.setFamilies([u"Verdana"])
-        font5.setPointSize(12)
-        font5.setBold(True)
-        self.defect.setFont(font5)
+        font6 = QFont()
+        font6.setFamilies([u"Verdana"])
+        font6.setPointSize(12)
+        font6.setBold(True)
+        self.defect.setFont(font6)
         self.defect.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_7.addWidget(self.defect)
@@ -550,11 +553,11 @@ class Ui_MainWindow(object):
         palette3.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush3)
 #endif
         self.comment.setPalette(palette3)
-        font6 = QFont()
-        font6.setFamilies([u"Verdana"])
-        font6.setPointSize(10)
-        font6.setUnderline(True)
-        self.comment.setFont(font6)
+        font7 = QFont()
+        font7.setFamilies([u"Verdana"])
+        font7.setPointSize(10)
+        font7.setUnderline(True)
+        self.comment.setFont(font7)
         self.comment.setStyleSheet(u"")
         self.comment.setFrameShape(QFrame.NoFrame)
         self.comment.setLineWidth(0)
@@ -621,11 +624,11 @@ class Ui_MainWindow(object):
         self.button_send_comm.setObjectName(u"button_send_comm")
         self.button_send_comm.setMinimumSize(QSize(150, 50))
         self.button_send_comm.setMaximumSize(QSize(150, 50))
-        font7 = QFont()
-        font7.setFamilies([u"Verdana"])
-        font7.setPointSize(10)
-        font7.setBold(False)
-        self.button_send_comm.setFont(font7)
+        font8 = QFont()
+        font8.setFamilies([u"Verdana"])
+        font8.setPointSize(10)
+        font8.setBold(False)
+        self.button_send_comm.setFont(font8)
         self.button_send_comm.setAutoFillBackground(False)
 
         self.horizontalLayout_11.addWidget(self.button_send_comm)
@@ -648,16 +651,18 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_23.addItem(self.horizontalSpacer_6)
 
-        self.lcdNumber_2 = QLCDNumber(self.tab_2)
-        self.lcdNumber_2.setObjectName(u"lcdNumber_2")
-        sizePolicy2.setHeightForWidth(self.lcdNumber_2.sizePolicy().hasHeightForWidth())
-        self.lcdNumber_2.setSizePolicy(sizePolicy2)
-        self.lcdNumber_2.setMinimumSize(QSize(200, 30))
-        self.lcdNumber_2.setSmallDecimalPoint(False)
-        self.lcdNumber_2.setMode(QLCDNumber.Bin)
-        self.lcdNumber_2.setSegmentStyle(QLCDNumber.Flat)
+        self.label_time_2 = QLabel(self.tab_2)
+        self.label_time_2.setObjectName(u"label_time_2")
+        sizePolicy2.setHeightForWidth(self.label_time_2.sizePolicy().hasHeightForWidth())
+        self.label_time_2.setSizePolicy(sizePolicy2)
+        self.label_time_2.setMinimumSize(QSize(150, 0))
+        font9 = QFont()
+        font9.setPointSize(12)
+        font9.setItalic(True)
+        self.label_time_2.setFont(font9)
+        self.label_time_2.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
-        self.horizontalLayout_23.addWidget(self.lcdNumber_2)
+        self.horizontalLayout_23.addWidget(self.label_time_2)
 
 
         self.verticalLayout_2.addLayout(self.horizontalLayout_23)
@@ -698,7 +703,7 @@ class Ui_MainWindow(object):
         palette5.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush3)
 #endif
         self.line_number_2.setPalette(palette5)
-        self.line_number_2.setFont(font2)
+        self.line_number_2.setFont(font3)
         self.line_number_2.setMouseTracking(True)
         self.line_number_2.setAutoFillBackground(False)
         self.line_number_2.setFrameShape(QFrame.NoFrame)
@@ -784,7 +789,7 @@ class Ui_MainWindow(object):
         palette6.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush3)
 #endif
         self.model_box_2.setPalette(palette6)
-        self.model_box_2.setFont(font3)
+        self.model_box_2.setFont(font4)
         self.model_box_2.setLayoutDirection(Qt.LeftToRight)
         self.model_box_2.setEditable(True)
         self.model_box_2.setCurrentText(u"")
@@ -805,7 +810,7 @@ class Ui_MainWindow(object):
         self.button_stop_2.setObjectName(u"button_stop_2")
         self.button_stop_2.setMinimumSize(QSize(150, 50))
         self.button_stop_2.setMaximumSize(QSize(150, 50))
-        self.button_stop_2.setFont(font4)
+        self.button_stop_2.setFont(font5)
         self.button_stop_2.setAutoFillBackground(False)
 
         self.horizontalLayout_15.addWidget(self.button_stop_2)
@@ -827,7 +832,7 @@ class Ui_MainWindow(object):
         self.button_test_2.setSizePolicy(sizePolicy2)
         self.button_test_2.setMinimumSize(QSize(150, 50))
         self.button_test_2.setMaximumSize(QSize(150, 50))
-        self.button_test_2.setFont(font4)
+        self.button_test_2.setFont(font5)
         self.button_test_2.setAutoFillBackground(False)
         self.button_test_2.setStyleSheet(u"")
 
@@ -839,7 +844,7 @@ class Ui_MainWindow(object):
         self.button_work_2.setSizePolicy(sizePolicy2)
         self.button_work_2.setMinimumSize(QSize(150, 50))
         self.button_work_2.setMaximumSize(QSize(150, 50))
-        self.button_work_2.setFont(font4)
+        self.button_work_2.setFont(font5)
         self.button_work_2.setAutoFillBackground(False)
 
         self.horizontalLayout_16.addWidget(self.button_work_2)
@@ -859,7 +864,7 @@ class Ui_MainWindow(object):
         sizePolicy2.setHeightForWidth(self.defect_2.sizePolicy().hasHeightForWidth())
         self.defect_2.setSizePolicy(sizePolicy2)
         self.defect_2.setMinimumSize(QSize(140, 35))
-        self.defect_2.setFont(font5)
+        self.defect_2.setFont(font6)
         self.defect_2.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_17.addWidget(self.defect_2)
@@ -926,7 +931,7 @@ class Ui_MainWindow(object):
         palette7.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush3)
 #endif
         self.comment_2.setPalette(palette7)
-        self.comment_2.setFont(font6)
+        self.comment_2.setFont(font7)
         self.comment_2.setStyleSheet(u"")
         self.comment_2.setFrameShape(QFrame.NoFrame)
         self.comment_2.setLineWidth(0)
@@ -993,7 +998,7 @@ class Ui_MainWindow(object):
         self.button_send_comm_2.setObjectName(u"button_send_comm_2")
         self.button_send_comm_2.setMinimumSize(QSize(150, 50))
         self.button_send_comm_2.setMaximumSize(QSize(150, 50))
-        self.button_send_comm_2.setFont(font7)
+        self.button_send_comm_2.setFont(font8)
         self.button_send_comm_2.setAutoFillBackground(False)
 
         self.horizontalLayout_21.addWidget(self.button_send_comm_2)
@@ -1031,6 +1036,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"\u0418\u043d\u0442\u0435\u0440\u0444\u0435\u0439\u0441 \u043a\u043e\u043d\u0442\u0440\u043e\u043b\u043b\u0435\u0440\u0430", None))
+        self.label_time.setText("")
         self.line_number_1.setText(QCoreApplication.translate("MainWindow", u"1-\u044f \u043b\u0438\u043d\u0438\u044f", None))
         self.button_stop.setText(QCoreApplication.translate("MainWindow", u"\u0420\u0415\u0416\u0418\u041c \u041e\u0421\u0422\u0410\u041d\u041e\u0412", None))
         self.button_test.setText(QCoreApplication.translate("MainWindow", u"\u0420\u0415\u0416\u0418\u041c \u0422\u0415\u0421\u0422", None))
@@ -1040,6 +1046,7 @@ class Ui_MainWindow(object):
         self.comment.setText(QCoreApplication.translate("MainWindow", u"\u041a\u041e\u041c\u041c\u0415\u041d\u0422\u0410\u0420\u0418\u0419", None))
         self.button_send_comm.setText(QCoreApplication.translate("MainWindow", u"\u041e\u0422\u041f\u0420\u0410\u0412\u0418\u0422\u042c", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_1), QCoreApplication.translate("MainWindow", u"\u041b\u0418\u041d\u0418\u042f 1", None))
+        self.label_time_2.setText("")
         self.line_number_2.setText(QCoreApplication.translate("MainWindow", u"2-\u044f \u043b\u0438\u043d\u0438\u044f", None))
         self.button_stop_2.setText(QCoreApplication.translate("MainWindow", u"\u0420\u0415\u0416\u0418\u041c \u041e\u0421\u0422\u0410\u041d\u041e\u0412", None))
         self.button_test_2.setText(QCoreApplication.translate("MainWindow", u"\u0420\u0415\u0416\u0418\u041c \u0422\u0415\u0421\u0422", None))

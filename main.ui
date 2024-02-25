@@ -356,7 +356,7 @@ border: 1px solid #5f5f5f;
            </spacer>
           </item>
           <item>
-           <widget class="QLCDNumber" name="lcdNumber">
+           <widget class="QLabel" name="label_time">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -365,18 +365,22 @@ border: 1px solid #5f5f5f;
             </property>
             <property name="minimumSize">
              <size>
-              <width>200</width>
-              <height>30</height>
+              <width>150</width>
+              <height>0</height>
              </size>
             </property>
-            <property name="smallDecimalPoint">
-             <bool>false</bool>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+              <italic>true</italic>
+              <bold>false</bold>
+             </font>
             </property>
-            <property name="mode">
-             <enum>QLCDNumber::Bin</enum>
+            <property name="text">
+             <string/>
             </property>
-            <property name="segmentStyle">
-             <enum>QLCDNumber::Flat</enum>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
@@ -1845,7 +1849,7 @@ border: 1px solid #5f5f5f;
            </spacer>
           </item>
           <item>
-           <widget class="QLCDNumber" name="lcdNumber_2">
+           <widget class="QLabel" name="label_time_2">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -1854,18 +1858,21 @@ border: 1px solid #5f5f5f;
             </property>
             <property name="minimumSize">
              <size>
-              <width>200</width>
-              <height>30</height>
+              <width>150</width>
+              <height>0</height>
              </size>
             </property>
-            <property name="smallDecimalPoint">
-             <bool>false</bool>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+              <italic>true</italic>
+             </font>
             </property>
-            <property name="mode">
-             <enum>QLCDNumber::Bin</enum>
+            <property name="text">
+             <string/>
             </property>
-            <property name="segmentStyle">
-             <enum>QLCDNumber::Flat</enum>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>

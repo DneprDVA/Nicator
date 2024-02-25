@@ -86,7 +86,7 @@ def prediction(
             with torch.no_grad():
                 preds_list = []
                 for i in range(len(img_list1)):
-                    outputs = model_ft(img_list1[i])                    
+                    outputs = model_ft(img_list1[i])
                     _, preds = torch.max(outputs, 1)
                     preds_list.append(preds)
 
