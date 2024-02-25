@@ -199,54 +199,7 @@ def main():
 
                     QTimer.singleShot(10, self.center)
 
-                    '''Create timer to update the LCD'''
-                    self.timer = QTimer()
-                    self.timer.timeout.connect(self.update_lcd)
-                    self.timer.start(1000)
-                    self.update_lcd()
 
-                    self.thread_tg_1 = Thread_tg(
-                        img_tg_check="images/Line_1/tg/",
-                        bot_num="6724363071:AAHgCI3CtHgpi5GF8NAyw7vR0gRLF6FMoaY",
-                        chat_id="-1002008064425",
-                    )
-                    self.thread_tg_2 = Thread_tg(
-                        img_tg_check="images/Line_2/tg/",
-                        bot_num="6446699116:AAGJEdSDleg3HYsIXKoDXKNyftnwzgmPduk",
-                        chat_id="-1002100830067",
-                    )
-                    # self.thread_tg_3 = Thread_tg(
-                    #     img_tg_check="images/Line_3/tg/",
-                    #     bot_num="6446699116:AAGJEdSDleg3HYsIXKoDXKNyftnwzgmPduk",
-                    #     chat_id="-1002100830067",
-                    # )
-
-                    basedir_1 = os.path.dirname("models_1" + "/")
-                    model_list_1 = os.listdir(basedir_1)
-
-                    basedir_2 = os.path.dirname("models_2" + "/")
-                    model_list_2 = os.listdir(basedir_2)
-
-                    # basedir_3 = os.path.dirname("models_3" + "/")
-                    # model_list_3 = os.listdir(basedir_3)
-
-                    self.model_box.addItems(model_list_1)
-                    self.model_box.currentTextChanged.connect(self.model_change)
-
-                    self.model_box_2.addItems(model_list_2)
-                    self.model_box_2.currentTextChanged.connect(self.model_change)
-
-                    # self.model_box_3.addItems(model_list_3)
-                    # self.model_box_3.currentTextChanged.connect(self.model_change)
-
-                    self.thread_1 = Thread(
-                        camera_path="images/Line_1/camera/",
-                        check_path="images/Line_1/source/",
-                        file_path="images/Line_1/source/",
-                        result_path_ok="images/Line_1/ok/",
-                        result_path_defect="images/Line_1/defect/",
-                        model_path="models_1",
-                        path_for_tg="images/Line_1/tg",
                     )
 
                     self.thread_test_1 = Thread(
@@ -269,14 +222,6 @@ def main():
                         path_for_tg="images/Line_2/tg",
                     )
 
-                    self.thread_test_2 = Thread(
-                        camera_path="images/Line_2/camera/",
-                        check_path="images/Line_2/source/",
-                        file_path="images/Line_2/source/",
-                        result_path_ok="images/Line_2/ok/",
-                        result_path_defect="images/Line_2/defect/",
-                        model_path="models_2",
-                        path_for_tg="images/Line_2/defect/",
                     )
 
                     # self.thread_3 = Thread(
@@ -316,19 +261,6 @@ def main():
                         )
                     )
 
-                    self.button_work.pressed.connect(
-                        lambda: self.button_work_func(                        
-                            model_box=self.model_box,
-                            thread_num=self.thread_1,
-                            thread_tg=self.thread_tg_1,
-                            button_work=self.button_work,
-                            button_test=self.button_test,
-                            defect=self.defect,
-                            main_pic=self.main_pic,
-                            text_send="Начало работы!",
-                            bot_num="6724363071:AAHgCI3CtHgpi5GF8NAyw7vR0gRLF6FMoaY",
-                            chat_id="-1002008064425",
-                        )
                     )
 
                     self.thread_1.result_no_data.connect(
@@ -348,13 +280,7 @@ def main():
                         )
                     )
 
-                    self.button_send_comm.pressed.connect(
-                        lambda: self.button_text_send_func(
-                            text_send_box=self.text_send,
-                            bot_num="6724363071:AAHgCI3CtHgpi5GF8NAyw7vR0gRLF6FMoaY",
-                            chat_id="-1002008064425",
-                        )
-                    )
+
 
                     """ 2-я ЛИНИЯ """
                     self.button_stop_2.pressed.connect(

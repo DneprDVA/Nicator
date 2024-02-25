@@ -259,53 +259,6 @@ def main():
                         path_for_tg="images/Line_2/tg",
                     )
 
-                    self.thread_test_2 = Thread(
-                        camera_path="images/Line_2/camera/",
-                        check_path="images/Line_2/source/",
-                        file_path="images/Line_2/source/",
-                        result_path_ok="images/Line_2/ok/",
-                        result_path_defect="images/Line_2/defect/",
-                        model_path="models_2",
-                        path_for_tg="images/Line_2/defect/",
-                    )
-
-                    # self.thread_3 = Thread(
-                    #     camera_path="images/Line_3/camera/",
-                    #     check_path="images/Line_3/source/",
-                    #     file_path="images/Line_3/source/",
-                    #     result_path_ok="images/Line_3/ok/",
-                    #     result_path_defect="images/Line_3/defect/",
-                    #     model_path="models_3",
-                    #     path_for_tg="images/Line_3/tg",
-                    # )
-
-                    # self.thread_test_3 = Thread(
-                    #     camera_path="images/Line_3/camera/",
-                    #     check_path="images/Line_3/source/",
-                    #     file_path="images/Line_3/source/",
-                    #     result_path_ok="images/Line_3/ok/",
-                    #     result_path_defect="images/Line_3/defect/",
-                    #     model_path="models_3",
-                    #     path_for_tg="images/Line_3/defect/",
-                    # )
-
-                    """ 1-я ЛИНИЯ """
-                    self.button_work_state = 'status_1'
-
-                    self.button_stop.pressed.connect(
-                        lambda: self.button_stop_func(
-                            thread_num=self.thread_1,
-                            thread_tg=self.thread_tg_1,
-                            thread_test_num=self.thread_test_1,
-                            button_work=self.button_work,
-                            button_test=self.button_test,
-                            defect=self.defect,
-                            main_pic=self.main_pic,
-                            text_send="Конец работы!",
-                            bot_num="6724363071:AAHgCI3CtHgpi5GF8NAyw7vR0gRLF6FMoaY",
-                            chat_id="-1002008064425",
-                        )
-                    )
 
                     self.button_work.pressed.connect(
                         lambda: self.button_work_func(                        
@@ -328,39 +281,7 @@ def main():
                         )
                     )
 
-                    self.button_test.pressed.connect(
-                        lambda: self.button_test_func(
-                            model_box=self.model_box,
-                            thread_test_num=self.thread_test_1,
-                            button_work=self.button_work,
-                            button_test=self.button_test,
-                            defect=self.defect,
-                            main_pic=self.main_pic,
-                        )
-                    )
 
-                    self.button_send_comm.pressed.connect(
-                        lambda: self.button_text_send_func(
-                            text_send_box=self.text_send,
-                            bot_num="6724363071:AAHgCI3CtHgpi5GF8NAyw7vR0gRLF6FMoaY",
-                            chat_id="-1002008064425",
-                        )
-                    )
-
-                    """ 2-я ЛИНИЯ """
-                    self.button_stop_2.pressed.connect(
-                        lambda: self.button_stop_func(
-                            thread_num=self.thread_2,
-                            thread_tg=self.thread_tg_2,
-                            thread_test_num=self.thread_test_2,
-                            button_work=self.button_work_2,
-                            button_test=self.button_test_2,
-                            defect=self.defect_2,
-                            main_pic=self.main_pic_2,
-                            text_send="Конец работы!",
-                            bot_num="6446699116:AAGJEdSDleg3HYsIXKoDXKNyftnwzgmPduk",
-                            chat_id="-1002100830067",
-                        )
                     )
 
                     self.button_work_2.pressed.connect(
@@ -381,17 +302,6 @@ def main():
                     self.thread_2.result_no_data.connect(
                         lambda result_no_data: self.stop_thread(
                             result_no_data, thread_num=self.thread_2
-                        )
-                    )
-
-                    self.button_test_2.pressed.connect(
-                        lambda: self.button_test_func(
-                            model_box=self.model_box_2,
-                            thread_test_num=self.thread_test_2,
-                            button_work=self.button_work_2,
-                            button_test=self.button_test_2,
-                            defect=self.defect_2,
-                            main_pic=self.main_pic_2,
                         )
                     )
 
