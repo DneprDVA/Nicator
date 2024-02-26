@@ -160,7 +160,7 @@ def main():
 
                                 # The list of column names as mentioned in the CSV file
                                 headersCSV = ["Дата", "Время", "L контр.", "a контр.", "b контр.",\
-                                "L", "a", "b", "DeltaE контр.", "DeltaE факт."] # , "Дата/время", "Марка материала"
+                                "L", "a", "b", "DeltaE контр.", "DeltaE факт."] # , "Дата/время", "Марка материала"                                
 
                                 current_time = time.strftime("%d-%m-%Y %H:%M:%S", time.localtime())
 

@@ -197,10 +197,7 @@ def main():
                     super(MyWindow, self).__init__(*args, **kwargs)
                     self.setupUi(self)                
 
-                    QTimer.singleShot(10, self.center)
-
-
-                    )
+                    QTimer.singleShot(10, self.center)                    
 
                     self.thread_test_1 = Thread(
                         camera_path="images/Line_1/camera/",
@@ -221,8 +218,7 @@ def main():
                         model_path="models_2",
                         path_for_tg="images/Line_2/tg",
                     )
-
-                    )
+                    
 
                     # self.thread_3 = Thread(
                     #     camera_path="images/Line_3/camera/",
@@ -256,12 +252,10 @@ def main():
                             defect=self.defect,
                             main_pic=self.main_pic,
                             text_send="Конец работы!",
-                            bot_num="6724363071:AAHgCI3CtHgpi5GF8NAyw7vR0gRLF6FMoaY",
+                            bot_num="",
                             chat_id="-1002008064425",
                         )
-                    )
-
-                    )
+                    )                    
 
                     self.thread_1.result_no_data.connect(
                         lambda result_no_data: self.stop_thread(
@@ -293,7 +287,7 @@ def main():
                             defect=self.defect_2,
                             main_pic=self.main_pic_2,
                             text_send="Конец работы!",
-                            bot_num="6446699116:AAGJEdSDleg3HYsIXKoDXKNyftnwzgmPduk",
+                            bot_num="",
                             chat_id="-1002100830067",
                         )
                     )
@@ -308,7 +302,7 @@ def main():
                             defect=self.defect_2,
                             main_pic=self.main_pic_2,
                             text_send="Начало работы!",
-                            bot_num="6446699116:AAGJEdSDleg3HYsIXKoDXKNyftnwzgmPduk",
+                            bot_num="",
                             chat_id="-1002100830067",
                         )
                     )
@@ -333,7 +327,7 @@ def main():
                     self.button_send_comm_2.pressed.connect(
                         lambda: self.button_text_send_func(
                             text_send_box=self.text_send_2,
-                            bot_num="6446699116:AAGJEdSDleg3HYsIXKoDXKNyftnwzgmPduk",
+                            bot_num="",
                             chat_id="-1002100830067",
                         )
                     )
@@ -385,7 +379,7 @@ def main():
                     # self.button_send_comm_3.pressed.connect(
                     #     lambda: self.button_text_send_func(
                     #         text_send_box=self.text_send_3,
-                    #         bot_num="6446699116:AAGJEdSDleg3HYsIXKoDXKNyftnwzgmPduk",
+                    #         bot_num="",
                     #         chat_id="-1002100830067",
                     #     )
                     # )
