@@ -21,7 +21,7 @@ from lab_space_calculation import *
 from colormath.color_objects import LabColor
 from colormath.color_diff import delta_e_cie1976, delta_e_cie1994, delta_e_cie2000
 def main():
-        
+            
     try:
         from ctypes import windll  # Only exists on Windows.
         myappid = "QC-Color"
@@ -398,5 +398,4 @@ def main():
     except pidfile.AlreadyRunningError:
         pass
 
-if __name__ == "__main__":
-    main()
+main()

@@ -144,3 +144,7 @@ green_button_state = ("QPushButton  {background-color: qlineargradient(x1: 0, y1
 bg_signal_no_data = ("QLabel {background-color: #6c6a89;"
                     "border: 1px;"
                     "border-radius: 15px;}")
+
+if __name__ == "__main__":
+    make_list(src_path, dest_path, count_result)
+    calculate_lab_space(img_src, image_list, quantity)

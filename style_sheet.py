@@ -28,5 +28,3 @@ bg_signal_defect = ("QLabel {background-color: qlineargradient(x1: 0, y1: 0, x2:
 bg_signal_no_data = ("QLabel {background-color: #6c6a89;"
                     "border: 1px;"
                     "border-radius: 15px;}")
-
-"HELLO!"
