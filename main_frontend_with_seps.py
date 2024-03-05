@@ -204,13 +204,17 @@ def main():
                 
                     # basedir_3 = os.path.dirname("models_3" + "/")
                     # model_list_3 = os.listdir(basedir_3)
+                    TOKEN = None
+                    
+                    with open("token.txt") as f:
+                        TOKEN = f.read().strip()
 
                     self.model_box.addItems(model_list_1)
                     self.model_box.currentTextChanged.connect(self.model_change)
 
                     self.thread_tg_1 = Thread_tg(
                         img_tg_check="images/Line_1/tg/",
-                        bot_num="6724363071:AAHgCI3CtHgpi5GF8NAyw7vR0gRLF6FMoaY",
+                        bot_num=TOKEN,
                         chat_id="-1002008064425",
                     )
 
@@ -277,7 +281,7 @@ def main():
                             defect=self.defect,
                             main_pic=self.main_pic,
                             text_send="Конец работы!",
-                            bot_num="6724363071:AAHgCI3CtHgpi5GF8NAyw7vR0gRLF6FMoaY",
+                            bot_num=TOKEN,
                             chat_id="-1002008064425",
                         )
                     )
@@ -292,7 +296,7 @@ def main():
                             defect=self.defect,
                             main_pic=self.main_pic,
                             text_send="Начало работы!",
-                            bot_num="6724363071:AAHgCI3CtHgpi5GF8NAyw7vR0gRLF6FMoaY",
+                            bot_num=TOKEN,
                             chat_id="-1002008064425",
                         )
                     )
